@@ -1,0 +1,46 @@
+.container {
+    padding: 18px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 2px;
+}
+
+form {
+    width: 100%;
+}
+
+h3 {
+    text-align: center;
+    color: white;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+p {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+button {
+    margin: 0 25%;
+    margin-top: 15px;
+    width: 50%;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+}

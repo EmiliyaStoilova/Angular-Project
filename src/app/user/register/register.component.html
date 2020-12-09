@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="wrapper">
+        <h3>Register</h3>
+        <form #f="ngForm" (ngSubmit)="handleSubmit(f.value)">
+            <input type="text" placeholder="username" name="username" #userUsername="ngModel" ngModel required>
+            <input type="text" placeholder="address" name="address" #userAddress="ngModel" ngModel required>
+            <input type="text" placeholder="phone" name="phone" #userPhone="ngModel" ngModel required>
+            <input type="email" placeholder="email" name="email" #userEmail="ngModel" ngModel required>
+
+            <!-- <p *ngIf="userEmail.touched && userEmail.errors?.required">
+            Email is required!
+        </p> -->
+
+            <input type="password" placeholder="password" name="password" #userPass="ngModel" ngModel required />
+            <input type="password" placeholder=" repeat password" name="re-password" #userRePass="ngModel" ngModel
+                required />
+            <button type="submit" [disabled]="f.invalid">Register</button>
+        </form>
+    </div>
+</div>

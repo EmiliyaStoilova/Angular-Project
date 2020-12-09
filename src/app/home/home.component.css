@@ -1,0 +1,48 @@
+.container {
+    min-height: 550px;
+}
+
+.welcome {
+    min-height: 400px;
+    background-image: url('../../assets/photo.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    width: 40%;
+    color: white;
+    float: left;
+}
+
+form {
+    width: 60%;
+    float: left;
+}
+
+.main {
+    width: 80%;
+    margin: 0 10%;
+}
+
+h2 {
+    text-align: center;
+    margin: 45px;
+}
+
+article {
+    padding: 5px;
+    padding-top: 25px;
+    margin: 10px;
+    margin-bottom: 50px;
+    display: inline-block;
+    width: 30%;
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+}

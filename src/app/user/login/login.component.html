@@ -1,0 +1,13 @@
+<div class="container">
+    <h3>LogIn</h3>
+    <form #f="ngForm" (ngSubmit)="handleSubmit(f.value)">
+        <input type="email" placeholder="email" name="email" #userEmail="ngModel" ngModel required>
+            
+        <!-- <p *ngIf="userEmail.touched && userEmail.errors?.required">
+            Email is required!
+        </p> -->
+
+        <input type="password" placeholder="password" name="password" #userPass="ngModel" ngModel required />
+        <button type="submit" [disabled]="f.invalid">LogIn</button>
+    </form>
+</div>
