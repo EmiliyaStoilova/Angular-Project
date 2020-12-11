@@ -1,5 +1,7 @@
 export interface IUser {
-    username: string;
-    phone: string;
-    address: string;
+    username: String;
+    phone: String;
+    address: String;
+    products: Array<String>;
+    orders: Array<String>;
 }

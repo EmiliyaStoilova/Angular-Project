@@ -11,10 +11,13 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: AuthService) { }
 
   ngOnInit(): void {
+    this.userService.getUser().then(data=> {
+      console.log(data.valueChanges().subscribe())
+    })
   }
 
-  loadData(){
-    console.log(this.userService.getUser)
-  }
+  // loadData(){
+  //   this.userService.getUser().
+  // }
 
 }
