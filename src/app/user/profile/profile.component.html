@@ -1,13 +1,23 @@
 <div class="container">
-        <h3> Blablablabla profile</h3>
+        <h3> {{currentUser.username}} profile</h3>
     <div class="info">
         <div class="data">
-            <p>Address: blabla</p>
-            <p>Phone: blabla</p>
-            <p>Products: 5</p>
+            <p>Address: {{currentUser.address}}</p>
+            <p>Phone: {{currentUser.phone}}</p>
+            <p>Products: {{currentUser.products.length}}</p>
         </div>
         <div class="add">
-            <button>Add new product</button>
+            <a routerLink="addProduct"><button>Add new product</button></a>
         </div>
+    </div>
+
+    <div *ngFor="let product of products" class="prod">
+        <h4 *ngIf="!product">There is no product in your profile!</h4>
+        <article *ngIf="product">
+            <img src='{{product.image}}'>
+            <p>{{product.name}}</p>
+            <p>Price: {{product.price}}</p>
+            <button #id value="{{product.id}}" (click)="handleClick(id.value)">Delete</button>
+        </article>
     </div>
 </div>

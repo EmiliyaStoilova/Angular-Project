@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 
 
 
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule
   ],
+  providers:[AuthGuard],
   exports:[
     HeaderComponent,
     FooterComponent

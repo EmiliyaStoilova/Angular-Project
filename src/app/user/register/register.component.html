@@ -3,17 +3,57 @@
         <h3>Register</h3>
         <form #f="ngForm" (ngSubmit)="handleSubmit(f.value)">
             <input type="text" placeholder="username" name="username" #userUsername="ngModel" ngModel required>
-            <input type="text" placeholder="address" name="address" #userAddress="ngModel" ngModel required>
-            <input type="text" placeholder="phone" name="phone" #userPhone="ngModel" ngModel required>
-            <input type="email" placeholder="email" name="email" #userEmail="ngModel" ngModel required>
 
-            <!-- <p *ngIf="userEmail.touched && userEmail.errors?.required">
-            Email is required!
-        </p> -->
+            <p *ngIf="userUsername.touched && userUsername.errors?.required">
+                Username is required!
+            </p>
 
-            <input type="password" placeholder="password" name="password" #userPass="ngModel" ngModel required />
-            <input type="password" placeholder=" repeat password" name="re-password" #userRePass="ngModel" ngModel
-                required />
+            <input type="text" placeholder="address" name="address" #userAddress="ngModel" ngModel minlength="10" maxlength="13" required>
+
+            <p *ngIf="userAddress.touched && userAddress.errors?.required">
+                Address is required!
+            </p>
+
+            <input type="text" placeholder="phone" name="phone" #userPhone="ngModel" minlength="10" maxlength="13" ngModel required>
+
+            <p *ngIf="userPhone.touched && userPhone.errors?.required">
+                Phone is required!
+            </p>
+
+            <p *ngIf="userPhone.touched && userPhone.errors?.minlength" class="error">
+                Phone number must be between 10 and 13 figures!
+            </p>
+
+            <input type="email" placeholder="email" name="email" #userEmail="ngModel" pattern="^[a-zA-Z0-9\.-]{5,}@\w+\.(com)$" ngModel required>
+
+            <p *ngIf="userEmail.touched && userEmail.errors?.required">
+                Email is required!
+            </p>
+
+            <p *ngIf="userEmail.touched && userEmail.errors?.pattern">
+                Email is not valid!
+            </p>
+
+            <input type="password" placeholder="password" name="password" #userPass="ngModel" pattern="[a-zA-Z0-9]{8,}" ngModel required />
+
+            <p *ngIf="userPass.touched && userPass.errors?.required">
+                Password is required!
+            </p>
+
+            <p *ngIf="userPass.touched && userPass.errors?.pattern">
+                Password should contains at least one Uppercase letter, one Lowercase letter and at least one digit!
+            </p>
+
+            <input type="password" placeholder="repeat password" name="rePassword" #userRePass="ngModel" ngModel required />
+
+            <p *ngIf="userRePass.touched && userRePass.errors?.required">
+                Repeat password is required!
+            </p>
+
+            <p *ngIf="userRePass.touched && passwordMatch(userPass.value, userRePass.value)">
+                Passwords don't match!
+            </p>
+
             <button type="submit" [disabled]="f.invalid">Register</button>
         </form>
     </div>

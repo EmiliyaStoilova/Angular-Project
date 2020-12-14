@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="wrapper">
+        <h3>Add new product</h3>
+        <form #f="ngForm" (ngSubmit)="handleSubmit(f.value)">
+            <input type="text" placeholder="Product name" name="name" #name="ngModel" ngModel required>
+
+            <p *ngIf="name.touched && name.errors?.required">
+                Product name is required!
+            </p>
+
+            <textarea placeholder="Description..." name="description" #description="ngModel" ngModel required></textarea>
+
+            <p *ngIf="description.touched && description.errors?.required">
+                Description name is required!
+            </p>
+
+            <input type="number" placeholder="Price" name="price" #price="ngModel" ngModel required>
+
+            <p *ngIf="price.touched && price.errors?.required">
+                Price filed is required!
+            </p>
+
+            <input type="text" placeholder="Image" name="image" #image="ngModel" ngModel required>
+
+            <p *ngIf="image.touched && image.errors?.required">
+                Image field is required!
+            </p>
+
+            <button type="submit" [disabled]="f.invalid">Add</button>
+        </form>
+    </div>
+</div>

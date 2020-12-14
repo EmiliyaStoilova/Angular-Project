@@ -9,11 +9,12 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HomeComponent } from './home/home.component';
 import { UserModule } from './user/user.module';
+import { ProductsModule } from './products/products.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -21,7 +22,8 @@ import { UserModule } from './user/user.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    UserModule
+    UserModule,
+    ProductsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

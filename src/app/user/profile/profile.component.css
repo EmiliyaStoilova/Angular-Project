@@ -24,6 +24,24 @@ h3{
     float: left;
 }
 
+.prod {
+    width: 80%;
+    margin: 20px;
+}
+
+article {
+    padding: 5px;
+    padding-top: 25px;
+    margin: 10px;
+    margin-bottom: 50px;
+    display: inline-block;
+    width: 30%;
+    border: 1px solid;
+    border-radius: 2px;
+    text-align: center;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+}
+
 .add {
     width: 40%;
     float: left;

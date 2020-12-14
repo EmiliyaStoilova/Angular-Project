@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../shared/interfaces/user';
 
@@ -32,8 +31,8 @@ export class AuthService {
                 this.pushUserData({ username, address, phone, uid });
                 console.log('Nice, it worked!');
                 this.router.navigate(["/"]);
-                this.cookie = value.user.ya;
-                document.cookie = `${environment.cookie}=${value.user.ya}`;
+                // this.cookie = value.user.ya;
+                // document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
             .catch(err => {
                 console.log('Something went wrong!')
@@ -45,9 +44,9 @@ export class AuthService {
             .then(value => {
                 console.log('Nice, it worked!');
 
-                this.cookie = value.user.ya;
+                // this.cookie = value.user.ya;
                 this.router.navigate(["/"]);
-                document.cookie = `${environment.cookie}=${value.user.ya}`;
+                // document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
             .catch(err => {
                 console.log('There is something wrong');
@@ -55,23 +54,26 @@ export class AuthService {
     }
 
     logout() {
+        // this.firestor.signOut().then()
         document.cookie = `${environment.cookie}=${this.cookie}=;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
         this.router.navigate(["/"]);
     }
 
-    async getUser(){
-        const promise = await this.firestor.currentUser;
-        const id = await promise.uid as string;
-  
-        // let asd = this.afDb.collection('users').doc(id).get();
-        let asd = this.afDb.doc<IUser>('users/' + id);
-        asd.valueChanges()
-        return asd;
-      }
+    async getUser() {
+        const id = (await this.getUserId()).toString()
+        // const userData = this.afDb.collection<IUser>('users/' + id);
+        const userData = this.afDb.collection<IUser>('users').doc(id)
+
+        return userData.valueChanges()
+    }
+
+    async updateUser(user) {
+        const id = (await this.getUserId()).toString()
+        this.afDb.collection<IUser>('users').doc(id).update({products: user})
+    }
 
     async getUserId() {
-        const promise = await this.firestor.currentUser;
-        const id = await promise.uid;
+        const id = (await (await this.firestor.currentUser).uid).toString();
 
         return id;
     }

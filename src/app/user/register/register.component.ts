@@ -12,6 +12,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  passwordMatch(pass, repass) {
+    if(pass === repass) {
+      return false
+    } else {
+      return true
+    }
+  }
   
   handleSubmit({email, password, username, address, phone}): void {
     this.userService.register(email, password, username, address, phone)
