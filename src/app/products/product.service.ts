@@ -36,7 +36,7 @@ export class ProductService {
             {
                 data.products.push(id)
             }
-            this.user.updateUser(data.products)
+            this.user.updateUserProducts(data.products)
         })
     }
 

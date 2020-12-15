@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import { ProductService } from '../products/product.service';
 import { IProduct } from '../shared/interfaces/product';
 import { IUser } from '../shared/interfaces/user';
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
     private afDb: AngularFirestore,
     private userService: AuthService,
     private products: ProductService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -34,24 +36,12 @@ export class HomeComponent implements OnInit {
     const uid = (await this.userService.getUserId()).toString()
 
     this.afDb.collection<IUser>('users').doc(uid).valueChanges().subscribe(data => {
-      if (!data.products.includes(id)) {
-        data.products.push(id)
+      if (!data.orders.includes(id)) {
+        data.orders.push(id)
       }
-      this.userService.updateUser(data.products)
+      this.router.navigate(['/user/shoppinCard'])
+      this.userService.updateUserOrders(data.orders)
     })
-
-    this.afDb.collection<IUser>('users').doc(uid).valueChanges().subscribe(data => {
-      if (!data.orders.includes(uid)) {
-        data.orders.push(uid)
-      }
-
-      this.updateUser(data)
-    })
-  }
-
-  async updateUser(user) {
-    const id = (await this.userService.getUserId()).toString()
-    this.afDb.collection<IUser>('users').doc(id).update({ orders: user })
   }
 
 }

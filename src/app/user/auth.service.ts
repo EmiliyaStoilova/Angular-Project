@@ -31,8 +31,8 @@ export class AuthService {
                 this.pushUserData({ username, address, phone, uid });
                 console.log('Nice, it worked!');
                 this.router.navigate(["/"]);
-                // this.cookie = value.user.ya;
-                // document.cookie = `${environment.cookie}=${value.user.ya}`;
+                this.cookie = value.user.ya;
+                document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
             .catch(err => {
                 console.log('Something went wrong!')
@@ -44,9 +44,9 @@ export class AuthService {
             .then(value => {
                 console.log('Nice, it worked!');
 
-                // this.cookie = value.user.ya;
+                this.cookie = value.user.ya;
                 this.router.navigate(["/"]);
-                // document.cookie = `${environment.cookie}=${value.user.ya}`;
+                document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
             .catch(err => {
                 console.log('There is something wrong');
@@ -67,9 +67,14 @@ export class AuthService {
         return userData.valueChanges()
     }
 
-    async updateUser(user) {
+    async updateUserProducts(user) {
         const id = (await this.getUserId()).toString()
         this.afDb.collection<IUser>('users').doc(id).update({products: user})
+    }
+
+    async updateUserOrders(user) {
+        const id = (await this.getUserId()).toString()
+        this.afDb.collection<IUser>('users').doc(id).update({orders: user})
     }
 
     async getUserId() {
