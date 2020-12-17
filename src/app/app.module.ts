@@ -10,11 +10,13 @@ import { CoreModule } from './core/core.module';
 import { HomeComponent } from './home/home.component';
 import { UserModule } from './user/user.module';
 import { ProductsModule } from './products/products.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    NotFoundComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

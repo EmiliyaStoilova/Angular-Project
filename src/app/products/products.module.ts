@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
-import { ShoppingCardComponent } from './shopping-card/shopping-card.component';
+import { ShoppingCardComponent } from '../user/shopping-card/shopping-card.component';
+import { ProductRoutingModule } from './product-routing.module';
 
 
 
@@ -10,7 +11,8 @@ import { ShoppingCardComponent } from './shopping-card/shopping-card.component';
   declarations: [AddProductComponent, ShoppingCardComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ProductRoutingModule
   ]
 })
 export class ProductsModule { }

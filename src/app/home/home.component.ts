@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
       if (!data.orders.includes(id)) {
         data.orders.push(id)
       }
-      this.router.navigate(['/user/shoppinCard'])
+      this.router.navigate(['/user/shoppingcard'])
       this.userService.updateUserOrders(data.orders)
     })
   }

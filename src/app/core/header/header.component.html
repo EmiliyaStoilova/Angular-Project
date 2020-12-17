@@ -2,7 +2,7 @@
     <ul>
         <li><a routerLink="/">Home</a></li>
         <li *ngIf="isLoggedIn()"><a routerLink="user/profile">Profile</a></li>
-        <li *ngIf="isLoggedIn()"><a routerLink="user/shoppinCard">Shopping Card</a></li>
+        <li *ngIf="isLoggedIn()"><a routerLink="user/shoppingcard">Shopping Card</a></li>
         <li *ngIf="!isLoggedIn()" class="rigth-side"><a routerLink="user/register">Register</a></li>
         <span (click)="logoutHandler()" *ngIf="isLoggedIn()" class="rigth-side logout">LogOut</span>
     </ul>

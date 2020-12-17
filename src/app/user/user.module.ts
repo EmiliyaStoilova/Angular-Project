@@ -5,14 +5,14 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
-import { RouterModule } from '@angular/router';
+import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ProfileComponent],
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    UserRoutingModule
   ],
   exports: [LoginComponent],
   providers: [AuthService]

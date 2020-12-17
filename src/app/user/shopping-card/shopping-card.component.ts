@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/shared/interfaces/user';
 import { AuthService } from 'src/app/user/auth.service';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../products/product.service';
 
 @Component({
   selector: 'app-shopping-card',

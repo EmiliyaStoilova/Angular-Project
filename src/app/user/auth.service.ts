@@ -31,8 +31,8 @@ export class AuthService {
                 this.pushUserData({ username, address, phone, uid });
                 console.log('Nice, it worked!');
                 this.router.navigate(["/"]);
-                this.cookie = value.user.ya;
-                document.cookie = `${environment.cookie}=${value.user.ya}`;
+                // this.cookie = value.user.ya;
+                // document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
             .catch(err => {
                 console.log('Something went wrong!')
