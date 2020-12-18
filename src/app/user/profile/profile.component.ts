@@ -15,32 +15,38 @@ export class ProfileComponent implements OnInit {
   products;
 
   constructor(
-    private userService: AuthService,
+    private user: AuthService,
     private productServise: ProductService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.loadUserData()
     this.loadProducts()
   }
 
-  loadUserData(){
-    this.userService.getUser().then(user => {
-      user.subscribe(data => {
-        this.currentUser = data;
-      })
+  loadUserData() {
+    this.user.getUser().subscribe(data => {
+      this.currentUser = data;
     })
   }
 
-  async loadProducts() {
-    const uid = (await this.userService.getUserId()).toString()
+  loadProducts() {
+    const uid = this.user.getUserId().toString()
     this.productServise.loadData().subscribe(data => {
-     this.products = data.filter(res => res.creator === uid)
+      this.products = data.filter(res => res.creator === uid)
     })
   }
 
   handleClick(id) {
     this.productServise.delete(id)
+
+    this.user.getUser().subscribe(user => {
+      if (user.products.includes(id)) {
+        let index = user.products.indexOf(id);
+        user.products.splice(index, 1)
+      }
+      this.user.updateUser(user)
+    })
   }
 
 }

@@ -11,8 +11,6 @@ import { IUser } from '../shared/interfaces/user';
 })
 export class AuthService {
 
-    cookie = '';
-
     constructor(
         private firestor: AngularFireAuth,
         private afDb: AngularFirestore,
@@ -30,8 +28,8 @@ export class AuthService {
                 const uid = value.user.uid;
                 this.pushUserData({ username, address, phone, uid });
                 console.log('Nice, it worked!');
+                localStorage.setItem('uid', uid);
                 this.router.navigate(["/"]);
-                // this.cookie = value.user.ya;
                 // document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
             .catch(err => {
@@ -43,8 +41,8 @@ export class AuthService {
         this.firestor.signInWithEmailAndPassword(formData.email, formData.password)
             .then(value => {
                 console.log('Nice, it worked!');
+                localStorage.setItem('uid', value.user.uid);
 
-                this.cookie = value.user.ya;
                 this.router.navigate(["/"]);
                 document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
@@ -54,33 +52,35 @@ export class AuthService {
     }
 
     logout() {
-        // this.firestor.signOut().then()
-        document.cookie = `${environment.cookie}=${this.cookie}=;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-        this.router.navigate(["/"]);
+        this.firestor.signOut().then(res => {
+            this.router.navigate(["/"]);
+            localStorage.clear();
+            console.log(document.cookie)
+            const cookie = document.cookie.split('=')[1]
+            console.log(cookie)
+            document.cookie = `${environment.cookie}=${cookie}=;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+        })
     }
 
-    async getUser() {
-        const id = (await this.getUserId()).toString()
+    getUser() {
+        const id = this.getUserId()
         // const userData = this.afDb.collection<IUser>('users/' + id);
-        const userData = this.afDb.collection<IUser>('users').doc(id)
-
-        return userData.valueChanges()
+        return this.afDb.collection<IUser>('users').doc(id).valueChanges()
+        // .snapshotChanges().pipe(
+        //     map(changes => {
+        //         return changes.payload.data() as IUser
+        //     })
+        // )
     }
 
-    async updateUserProducts(user) {
-        const id = (await this.getUserId()).toString()
-        this.afDb.collection<IUser>('users').doc(id).update({products: user})
+    updateUser(user) {
+        const id = this.getUserId()
+        return this.afDb.collection<IUser>('users').doc(id).set(user)
     }
 
-    async updateUserOrders(user) {
-        const id = (await this.getUserId()).toString()
-        this.afDb.collection<IUser>('users').doc(id).update({orders: user})
-    }
-
-    async getUserId() {
-        const id = (await (await this.firestor.currentUser).uid).toString();
-
-        return id;
+    getUserId() {
+        const id = localStorage.getItem('uid')
+        return id
     }
 
     private pushUserData(user) {

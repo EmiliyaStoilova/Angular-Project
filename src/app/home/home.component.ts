@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private afDb: AngularFirestore,
-    private userService: AuthService,
+    private user: AuthService,
     private products: ProductService,
     private router: Router
   ) { }
@@ -29,18 +29,16 @@ export class HomeComponent implements OnInit {
   }
 
   isLoggedIn() {
-    return this.userService.isLoggedIn()
+    return this.user.isLoggedIn()
   }
 
-  async handleClick(id) {
-    const uid = (await this.userService.getUserId()).toString()
-
-    this.afDb.collection<IUser>('users').doc(uid).valueChanges().subscribe(data => {
-      if (!data.orders.includes(id)) {
-        data.orders.push(id)
+  handleClick(id) {
+    this.user.getUser().subscribe(user => {
+      if (!user.orders.includes(id)) {
+        user.orders.push(id)
       }
+      this.user.updateUser(user)
       this.router.navigate(['/user/shoppingcard'])
-      this.userService.updateUserOrders(data.orders)
     })
   }
 

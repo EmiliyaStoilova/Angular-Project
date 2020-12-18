@@ -1,5 +1,5 @@
-<div *ngIf="!isLoggedIn()" class="container">
-    <div class="welcome">
+<div class="container">
+    <div class="welcome" *ngIf="!isLoggedIn()">
         <div class="title">
             <h1>Welcome to our website!</h1>
         </div>
@@ -8,29 +8,16 @@
         </div>
     </div>
     <div class="main">
-        <h2>Top 3 offers!</h2>
-        <div *ngFor="let product of data">
-            <h2 *ngIf="!product">There is no products yet!</h2>
-            <article *ngIf="product">
-                <img src='{{product.image}}'>
-                <p>{{product.name}}</p>
-                <p>Price: {{product.price}}</p>
-            </article>
-        </div>
-    </div>
-</div>
 
-<div *ngIf="isLoggedIn()" class="container">
-    <div class="main">
-        <h2>Look for something awesome!</h2>
-        <div *ngFor="let product of data">
-            <h2 *ngIf="!product">There is no products yet!</h2>
-            <article *ngIf="product">
-                <img src='{{product.image}}'>
-                <p>{{product.name}}</p>
-                <p>Price: {{product.price}}</p>
-                <button #id value="{{product.id}}" (click)="handleClick(id.value)">Add to shopping card</button>
-            </article>
-        </div>
+        <h2 *ngIf="data.length!==0">Look for something awesome!</h2>
+        
+        <h2 *ngIf="data.length===0" class="none">There is no products yet!</h2>
+
+        <article *ngFor="let product of data">
+            <img src='{{product.image}}'>
+            <p>{{product.name}}</p>
+            <p>Price: {{product.price}}</p>
+            <button *ngIf="isLoggedIn()" #id value="{{product.id}}" (click)="handleClick(id.value)">Add to shopping card</button>
+        </article>
     </div>
 </div>

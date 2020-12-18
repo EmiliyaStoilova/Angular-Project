@@ -1,5 +1,5 @@
 <div class="container">
-        <h3> {{currentUser.username}} profile</h3>
+    <h2> {{currentUser.username}} profile</h2>
     <div class="info">
         <div class="data">
             <p>Address: {{currentUser.address}}</p>
@@ -11,9 +11,10 @@
         </div>
     </div>
 
-    <div *ngFor="let product of products" class="prod">
-        <h4 *ngIf="!product">There is no product in your profile!</h4>
-        <article *ngIf="product">
+    <div class="prod">
+        <h3 *ngIf="products.length===0">There is no product yet in your profile!</h3>
+
+        <article *ngFor="let product of products">
             <img src='{{product.image}}'>
             <p>{{product.name}}</p>
             <p>Price: {{product.price}}</p>

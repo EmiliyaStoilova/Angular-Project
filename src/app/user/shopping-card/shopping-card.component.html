@@ -2,9 +2,9 @@
     <h1>Shopping card!</h1>
 
     <div class="main">
+        <h2 *ngIf="orders.length===0">There is no orders yet!</h2>
         <div class="table">
-            <h2 *ngIf="!orders">There is no orders yet!</h2>
-            <table *ngIf="orders">
+            <table *ngIf="orders.length!==0">
                 <tr>
                     <th>Product</th>
                     <th></th>
@@ -28,7 +28,7 @@
         </div>
         <div class="price">
             <p><b>Total sum: {{totalSum}}</b></p>
-            <button (click)="handleByu()">Byu</button>
+            <button (click)="handleBuy()">Buy</button>
         </div>
     </div>
 </div>

@@ -18,8 +18,8 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async handleSubmit(data) {
-    let creator =(await this.user.getUserId()).toString()
+  handleSubmit(data) {
+    let creator = this.user.getUserId().toString()
     data.id = '';
     data.creator = creator;
     this.service.create(data)

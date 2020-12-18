@@ -26,17 +26,15 @@ export class ProductService {
         })
     }
 
-    async setUser(id){
-        const uid = (await this.user.getUserId()).toString()
-
+    setUser(id){
         this.afDb.collection<IProduct>('products').doc(this.productId).update({id})
 
-        this.afDb.collection<IUser>('users').doc(uid).valueChanges().subscribe(data => {
+        this.user.getUser().subscribe(data => {
             if(!data.products.includes(id))
             {
                 data.products.push(id)
             }
-            this.user.updateUserProducts(data.products)
+            this.user.updateUser(data)
         })
     }
 

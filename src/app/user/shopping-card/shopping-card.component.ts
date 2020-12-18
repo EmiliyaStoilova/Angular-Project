@@ -22,36 +22,33 @@ export class ShoppingCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadOrders();
-    this.user.getUser().then(data => data.subscribe(data => {
+    this.user.getUser().subscribe(data => {
       this.userData = data;
-    }))
+    })
+    this.loadOrders();
   }
 
   loadOrders() {
     this.productServise.loadData().subscribe(productData => {
-      this.user.getUser().then(res => res.subscribe(userData => {
-        productData.forEach(product => {
-          if(userData.orders.includes(product.id)) {
-            this.orders.push(product)
-            this.totalSum += product.price as number;
-          }
-        })
-
-      }))
+      productData.forEach(product => {
+        if (this.userData.orders.includes(product.id)) {
+          this.orders.push(product)
+          this.totalSum += product.price as number;
+        }
+      })
     });
   }
 
   handleDelete(id) {
-    this.user.getUser().then(res => res.subscribe(userData => {
+    this.user.getUser().subscribe(userData => {
       let index = userData.orders.indexOf(id);
       userData.orders.splice(index, 1)
-      this.user.updateUserOrders(userData.orders).then(res => this.router.navigate(['']))
-    }))
+      this.user.updateUser(userData)
+    })
   }
 
-  handleByu() {
-    this.user.updateUserOrders([]).then(res => this.router.navigate(['']));
+  handleBuy() {
+    this.user.updateUser({...this.userData, orders: []}).then(res => this.router.navigate(['/']))
   }
 
 }
