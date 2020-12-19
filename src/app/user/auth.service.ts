@@ -30,7 +30,8 @@ export class AuthService {
                 console.log('Nice, it worked!');
                 localStorage.setItem('uid', uid);
                 this.router.navigate(["/"]);
-                // document.cookie = `${environment.cookie}=${value.user.ya}`;
+                //@ts-ignore
+                document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
             .catch(err => {
                 console.log('Something went wrong!')
@@ -44,6 +45,7 @@ export class AuthService {
                 localStorage.setItem('uid', value.user.uid);
 
                 this.router.navigate(["/"]);
+                //@ts-ignore
                 document.cookie = `${environment.cookie}=${value.user.ya}`;
             })
             .catch(err => {
@@ -64,13 +66,7 @@ export class AuthService {
 
     getUser() {
         const id = this.getUserId()
-        // const userData = this.afDb.collection<IUser>('users/' + id);
         return this.afDb.collection<IUser>('users').doc(id).valueChanges()
-        // .snapshotChanges().pipe(
-        //     map(changes => {
-        //         return changes.payload.data() as IUser
-        //     })
-        // )
     }
 
     updateUser(user) {
